@@ -23,51 +23,39 @@ def anagrams(words: list = None) -> bool:
     if words is None:
         # TODO: demander les mots ici
 
-        words = []
         print("Veuillez inscrire le premier mot : \n")
-        words.append(input())
+        words = [input()]
 
         print("Veuillez inscrire le deuxième mot : \n")
         words.append(input())
 
         for letter in words[0]:
-            if letter not in words[1]:
-                return False
-            else:
-                return True
+            return letter in words[1]
 
     else:
         for letter in words[0]:
-            if letter not in words[1]:
-                return False
-            else:
-                return True
+            return letter in words[1]
 
 def contains_doubles(items: list) -> bool:
 
-    return False if list(set(items)) == items else True
+    return list(set(items)) != items
 
 
 def best_grades(student_grades: dict) -> dict:
     # TODO: Retourner un dictionnaire contenant le nom de l'étudiant ayant la meilleure moyenne ainsi que sa moyenne
 
-    averages = 0
     best_average = 0
     best_student = ""
 
     for name, grades in student_grades.items():
-        for note in grades:
-            averages += note
-        averages /= (len(grades))
-        student_grades[name] = averages
-        averages = 0
+        student_grades[name] = sum([note for note in grades]) / (len(grades))
 
     for student in student_grades:
         if student_grades[student] > best_average:
             best_average = student_grades[student]
             best_student = student
 
-    return {best_student : best_average}
+    return {best_student: best_average}
 
 
 def frequence(sentence: str) -> dict:
@@ -80,6 +68,7 @@ def frequence(sentence: str) -> dict:
             letter_dictionnary[letter] += 1
         else:
             letter_dictionnary[letter] = 1
+
     return letter_dictionnary
 
 
@@ -112,8 +101,9 @@ def print_recipe(ingredients) -> None:
 
         print("Quel est le nom de la recette que vous cherchez: ")
         recette = input()
+
         if recette in ingredients:
-            print(f"Voici les ingrédients de la recette {recette}:", ingredients[recette])
+            print("Voici les ingrédients de la recette choisi:", ingredients[recette])
         else:
             print("Désolé, mais cette recette n'est pas dans le livre de recette")
 
